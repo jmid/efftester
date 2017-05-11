@@ -1,0 +1,9 @@
+# source code paths
+S src
+
+# build path
+B _build/src
+
+# package path
+PKG qcheck
+

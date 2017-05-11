@@ -1,0 +1,6 @@
+#directory "_build/src";;
+#use "topfind";;
+#require "qcheck";;
+#load "efftester.cma";;
+open QCheck;;
+open Efftester;;
