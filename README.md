@@ -87,6 +87,8 @@ Bugs found:
 
 MPR#7531  https://caml.inria.fr/mantis/view.php?id=7531  Delayed effects in partially applied functions
 
+MPR#7533  https://caml.inria.fr/mantis/view.php?id=7533  Wrong code generation of e / e' and e mod e' with effectful e
+
 MPR#7201  https://caml.inria.fr/mantis/view.php?id=7201  Wrong optimization of `0 / e`
 	  						 (reported by way of Jean-Christophe Filliatre)
 
