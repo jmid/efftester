@@ -43,7 +43,8 @@ failure (1 tests failed, ran 1 tests)
 Interestingly, the produced counterexamples such as
 `let o = (let j = List.hd [] in fun w -> int_of_string) "" in 0`
 above illustrate observable differences in the executables produced by
-the two backend, aka, bugs.
+the two backend, aka, bugs. This particular one is a variant of MPR#7531
+listed below.
 
 You can provide a known seed with the flag `-s`: `./effmain.native -v -s 228021772`
 to reproduce an earlier run.
@@ -103,15 +104,45 @@ GPR#956  https://github.com/ocaml/ocaml/pull/956  Keep possibly-effectful expres
 
 
 
-Statistics:
------------
+Observing the generated programs:
+---------------------------------
+
+To invoke the generator directly, first `make eff` and then start
+`ocaml` from within this directory (this will load modules suitably
+via `.ocamlinit`).
+
+To generate an arbitrary program you can now invoke `Gen.generate1
+term_gen.gen` (wrapped with a suitable string coersion to make the
+generator's output more understandable).  The output changes per each
+invocation:
+
+```
+$ ocaml
+        OCaml version 4.04.0
+
+[some lines about loaded libs omitted]
+
+# Print.option (toOCaml ~typeannot:false) (Gen.generate1 term_gen.gen);;
+- : string = "Some (exit ((fun n -> (-98051756132636271)) string_of_bool))"
+
+# Print.option (toOCaml ~typeannot:false) (Gen.generate1 term_gen.gen);;
+- : string =
+"Some ((mod) (pred (let h = if true then exit ((/) (if false then 1830787755246062127
+ else (-2895157864674163253)) (lnot ((asr) (-3089269914618536456) 93))) else 
+ let w = print_endline (let i = lnot 996022529208063915 in string_of_int 25) in 
+ string_of_bool (exit (abs (-427726557501168681))) in ( * ) (pred (lnot (List.hd 
+ (List.hd (exit 991))))) (lnot 5))) ((lsr) 225 755))"
+```
+
 
 To observe the distribution of the effect-driven program generator you
 can build a different target with `make stat` which results in a
-`effstat.native` executable.
+`effstat.native` executable. This program runs a constant true test
+over generated terms while logging the size of each term.
 
 A bashscript `runstat.sh` will then run `./effstat.native -v`, log the
-output, process it, and pass it to the program 'ministat'.
+output, process it with `sed`, and pass the output to the program
+'ministat'.
 
 `runstat.sh` itself requires a *nix platform with bash and 'ministat'
 installed.
