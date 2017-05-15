@@ -120,7 +120,7 @@ When run, `runstat.sh` should produce output along these lines (you
 can adjust the 50 generated terms in `src/effstat.ml`):
 ```
 $ ./runstat.sh 
-x stat_height.txt
+x stat_size.txt
 +-------------------------------------------------------------------------------------------------------------+
 |             x                                                                                               |
 |            xx                                                                                               |
