@@ -1017,6 +1017,7 @@ let rec termShrinker term = match term with
       | _       -> Iter.empty)
     <+> (Iter.of_list [n; m])
     <+> (match b with
+      | Lit _          -> Iter.empty
       | Variable (_,_) -> Iter.empty
       | _              -> let x = newvar () in
 			  Iter.return (Let (x,Bool,b,If (t,Variable (Bool,x),m,n,e),t,e)))
@@ -1195,7 +1196,7 @@ let print_wrap t =
 
 let term_gen =
   make ~print:(Print.option (toOCaml ~typeannot:false))
-       ~shrink:shrinker
+(*       ~shrink:shrinker *)
     (listPermuteTermGenRecWrapper initTriEnv Int (true,false)) (* Initial goal here! *)
 
 let term_gen_shrink = set_shrink shrinker term_gen
