@@ -5,7 +5,7 @@ This is a prototype implementation of a compiler testing approach
 described in the paper:
 
     Effect-Driven QuickChecking of Compilers
-    Jan Midtgaard, Patrick Kasting, Mathias Nygaard Justesen, Flemming Nielson, Hanne Riis Nielson
+    Jan Midtgaard, Mathias Nygaard Justesen, Patrick Kasting, Flemming Nielson, Hanne Riis Nielson
     ICFP'17
 
 We suggest to generate programs following a dedicated type and effect
