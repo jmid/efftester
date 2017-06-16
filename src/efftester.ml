@@ -970,6 +970,16 @@ let rec fv x = function
   | Let (y,_,m,n,_,_) -> fv x m || (if x = y then false else fv x n)
   | If (_,b,m,n,_)    -> fv x b || fv x m || fv x n
 
+(* renames free occurrences of 'x' into 'y' *)
+let rec alpharename m x y = match m with
+  | Lit _                -> m
+  | Variable (t,z)       -> if x=z then Variable (t,y) else m
+  | Lambda (t,z,t',m')   -> if x=z then m else Lambda(t,z,t',alpharename m' x y)
+  | App (rt,m,at,n,e)    -> App (rt, alpharename m x y, at, alpharename n x y, e)
+  | Let (z,t,m,n,t',e)   -> let m' = alpharename m x y in
+			    if x=z then Let (z,t,m',n,t',e) else Let (z,t,m',alpharename n x y,t',e)
+  | If (t,b,n,n',e)      -> If (t,alpharename b x y, alpharename n x y, alpharename n' x y, e)
+
 let rec shrinkLit = function
   | LitInt i   -> Iter.map (fun i' -> Lit (LitInt i')) (Shrink.int i)
   | LitStr s   -> Iter.map (fun s' -> Lit (LitStr s')) (Shrink.string s)
@@ -996,7 +1006,13 @@ let rec termShrinker term = match term with
 	    if fv x m'
 	    then Iter.return (Let (x,s,n,m',rt,e))
 	    else Iter.of_list [m'; Let (x,s,n,m',rt,e)]
-	  | Let (x,t,m',n',s,e') -> Iter.return (Let (x,t,m',App (rt,n',at,n,e),rt,e)) (* potential var capt.*)
+	  | Let (x,t,m',n',s,e') ->
+	    if fv x n
+	    then (* potential var capt.*)
+	      let x' = newvar () in
+	      Iter.return (Let (x',t,m',App (rt,alpharename n' x x',at,n,e),rt,e))
+	    else
+	      Iter.return (Let (x,t,m',App (rt,n',at,n,e),rt,e))
 	  | _ -> Iter.empty)
     <+> (Iter.map (fun m' -> App (rt,m',at,n,e)) (termShrinker m))
     <+> (Iter.map (fun n' -> App (rt,m,at,n',e)) (termShrinker n))
@@ -1006,8 +1022,14 @@ let rec termShrinker term = match term with
       | _       -> Iter.empty)
     <+>
     (match fv x n, m with
-      | false, Let (x',t',m',_,_,_) -> Iter.of_list [n; Let (x',t',m',n,s,e)]  (* potential var capt.*)
-      | false, _                    -> Iter.return n
+      | false, Let (x',t',m',_,_,_) ->
+	if fv x' n
+	then (* potential var capt.*)
+	  let y = newvar () in
+	  Iter.of_list [n; Let (y,t',m',n,s,e)]
+	else
+	  Iter.of_list [n; Let (x',t',m',n,s,e)]
+      | false, _ -> Iter.return n
       | true,  _ -> Iter.empty)
     <+> (Iter.map (fun m' -> Let (x,t,m',n,s,e)) (termShrinker m))
     <+> (Iter.map (fun n' -> Let (x,t,m,n',s,e)) (termShrinker n))
