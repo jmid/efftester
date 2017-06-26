@@ -21,6 +21,9 @@ Building and running:
 ---------------------
 
 The tester requires OCaml, the QCheck library, and a *nix-like platform with `diff` and `/dev/null`.
+The below output is obtained with QCheck version 0.5.2. If compiled as is with a later QCheck version
+(known to produce more output) the resulting program may produce a somewhat garbled output.
+
 
 To build simply run `make`.
 
