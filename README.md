@@ -7,6 +7,7 @@ described in the paper:
     Effect-Driven QuickChecking of Compilers
     Jan Midtgaard, Mathias Nygaard Justesen, Patrick Kasting, Flemming Nielson, Hanne Riis Nielson
     ICFP'17
+    [http://janmidtgaard.dk/papers/Midtgaard-al:ICFP17-full.pdf](http://janmidtgaard.dk/papers/Midtgaard-al%3aICFP17-full.pdf) (full version)
 
 We suggest to generate programs following a dedicated type and effect
 system that determines whether a program has evaluation-order
