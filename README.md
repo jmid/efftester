@@ -9,6 +9,9 @@ described in the paper:
 >  ICFP'17,
 >  [http://janmidtgaard.dk/papers/Midtgaard-al:ICFP17-full.pdf](http://janmidtgaard.dk/papers/Midtgaard-al%3aICFP17-full.pdf) (full version)
 
+I've put an extra copy of the paper up here: http://people.compute.dtu.dk/janmi/Midtgaard-al:ICFP17-full.pdf after the overwhelming interest drowned my usual hosting.
+
+
 We suggest to generate programs following a dedicated type and effect
 system that determines whether a program has evaluation-order
 dependence. By reading the type-and-effect-system relation bottom up,
