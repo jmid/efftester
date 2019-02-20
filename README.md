@@ -109,7 +109,7 @@ https://github.com/bloomberg/bucklescript/issues/1667 failure: internal compiler
 
 https://github.com/bloomberg/bucklescript/issues/1692 BuckleScript produces incorrect JavaScript
 
-https://github.com/BuckleScript/bucklescript/issues/1759 comparion+difference of units yields different results
+https://github.com/BuckleScript/bucklescript/issues/1759 comparison+difference of units yields different results
 
 https://github.com/BuckleScript/bucklescript/issues/1760 div+mod: Division_by_zero removed
 
