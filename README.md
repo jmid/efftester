@@ -99,6 +99,25 @@ MPR#7201  https://caml.inria.fr/mantis/view.php?id=7201  Wrong optimization of `
 	  						 (reported by way of Jean-Christophe Filliatre)
 
 
+A quick port to [js_of_ocaml](http://ocsigen.org/js_of_ocaml/) revealed the following 2 bugs (reported together):
+ 
+https://github.com/ocsigen/js_of_ocaml/issues/584  function difference+equality exception removed
+
+A quick port to [BuckleScript](https://bucklescript.github.io/) revealed the following 8 bugs:
+
+https://github.com/bloomberg/bucklescript/issues/1667 failure: internal compiler Failure
+
+https://github.com/bloomberg/bucklescript/issues/1692 BuckleScript produces incorrect JavaScript
+
+https://github.com/BuckleScript/bucklescript/issues/1759 comparion+difference of units yields different results
+
+https://github.com/BuckleScript/bucklescript/issues/1760 div+mod: Division_by_zero removed
+
+https://github.com/BuckleScript/bucklescript/issues/1761 comp: function comparison succeeds
+      
+https://github.com/BuckleScript/bucklescript/issues/1762 order: bool_of_string erroneously optimized
+
+
 Known bugs recreated:
 ---------------------
 
