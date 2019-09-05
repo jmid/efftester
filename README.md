@@ -98,6 +98,8 @@ MPR#7533  https://caml.inria.fr/mantis/view.php?id=7533  Wrong code generation o
 MPR#7201  https://caml.inria.fr/mantis/view.php?id=7201  Wrong optimization of `0 / e`
 	  						 (reported by way of Jean-Christophe Filliatre)
 
+   #8864  https://github.com/ocaml/ocaml/issues/8864     Left-shift of 0 yields negative number
+                                                         (found by [Murilo Giacometti Rocha](https://github.com/murilogiacometti))
 
 A quick port to [js_of_ocaml](http://ocsigen.org/js_of_ocaml/) revealed the following 2 bugs (reported together):
  
