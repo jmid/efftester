@@ -14,7 +14,7 @@ We suggest to generate programs following a dedicated type and effect
 system that determines whether a program has evaluation-order
 dependence. By reading the type-and-effect-system relation bottom up,
 in a goal-directed manner we can generate programs that are free of
-evaluation-oder dependence. We can thus run such programs with both
+evaluation-order dependence. We can thus run such programs with both
 the bytecode and native code backends of OCaml, log their observable
 behaviour to a file, and `diff` the two behaviours.
 
